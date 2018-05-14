@@ -1,38 +1,29 @@
 import React from "react";
 
 class IdeaCard extends React.Component {
-  render() {
+  render(props) {
     return (
-      <div className="col s12 m6 l4">
-        <div className="card blue-grey darken-1">
-          <div className="card-content white-text">
-            <span
-              className="card-title"
-              contentEditable
-              name="title"
-              onBlur={event => this.props.updateTitle(event, this.props.id)}
-            >
+      <React.Fragment>
+        <div className="card bg-light text-dark">
+          <div className="card-body">
+            <h4 className="card-title" name="title">
               {this.props.title}
-            </span>
-            <p
-              contentEditable
-              onBlur={event => this.props.updateBody(event, this.props.id)}
-              name="body"
-            >
+            </h4>
+            <p name="body" className="card-text">
               {this.props.body}
             </p>
           </div>
-          <div className="card-action">
-            <button
-              onClick={() => this.props.destroy(this.props.id)}
-              className="btn"
+          <div className="card-footer">
+            <a
+              className="btn btn-default"
+              onClick={event => this.props.onSelect(event, this.props.id)}
             >
-              <i className="material-icons left">delete</i>
-              Delete
-            </button>
+              Edit
+            </a>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
+export default IdeaCard;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import IdeaForm from "./IdeaForm";
+import IdeaList from "./IdeaList";
 import * as ideaService from "../services/ideas.service";
 
 class Ideas extends Component {
@@ -66,18 +67,14 @@ class Ideas extends Component {
     });
   }
 
+  searchIdeas(query){
+    let ideas = this.state.ideas.filter(idea=>{
+      return idea.title.includes(query) || idea.body.includes(query)
+    })
+  }
+
   render() {
-    const ideas = this.state.ideas ? (
-      this.state.ideas.map(idea => (
-        <li key={idea._id} onClick={this.onSelect.bind(this, idea)}>
-          {idea.title}
-          {" "}
-          {idea.body}
-        </li>
-      ))
-    ) : (
-      <React.Fragment />
-    );
+    const ideas = this.state.ideas;
 
     return (
       <React.Fragment>
@@ -89,8 +86,7 @@ class Ideas extends Component {
             onCancel={this.onCancel}
           />
         </div>
-
-        <ul>{ideas}</ul>
+        <IdeaList ideas={ideas} select={this.onSelect} />
       </React.Fragment>
     );
   }

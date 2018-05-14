@@ -92,7 +92,7 @@ class IdeaForm extends React.Component {
       <React.Fragment>
         <h3> New Idea</h3>
 
-        <div className="col-md-5">
+        <div className="col-md-4">
           <label htmlFor="title">Title:</label>
           <input
             className="form-control"
@@ -114,7 +114,7 @@ class IdeaForm extends React.Component {
             type="text"
           />
         </div>
-        <div className="form-group">
+        <div className="">
           <button
             type="button"
             className="CreateIdea-submit btn btn-primary"
