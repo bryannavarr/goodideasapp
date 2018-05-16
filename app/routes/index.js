@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const ideasRoutes = require("./ideas.routes");
 const clientRoutes = require("./client.routes");
+const fileUploadRoutes = require("./fileupload.routes");
 
 module.exports = router;
 
@@ -9,6 +10,7 @@ router.get("/favicon.ico", (req, res) => {
 });
 
 router.use("/api/ideas", ideasRoutes);
+router.use("/api/fileupload", fileUploadRoutes);
 
 useAPIErrorHandlers(router);
 

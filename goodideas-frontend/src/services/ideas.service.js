@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "../config/axios.config";
 
 const headers = {};
@@ -19,9 +18,10 @@ export function readAll() {
     method: "GET",
     headers
   };
-  return axiosInstance.get(baseUrl, config)
-  .then(responseSuccessHandler)
-  .catch(responseErrorHandler);
+  return axiosInstance
+    .get(baseUrl, config)
+    .then(responseSuccessHandler)
+    .catch(responseErrorHandler);
 }
 
 export function update(data) {
@@ -41,8 +41,8 @@ export function del(id) {
     headers
   };
   return axiosInstance(`${baseUrl}/${id}`, config)
-  .then(responseSuccessHandler)
-  .catch(responseErrorHandler);
+    .then(responseSuccessHandler)
+    .catch(responseErrorHandler);
 }
 
 const responseSuccessHandler = response => {

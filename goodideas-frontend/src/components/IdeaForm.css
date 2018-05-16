@@ -1,0 +1,17 @@
+body {
+  background: url(https://images.unsplash.com/photo-1461360228754-6e81c478b882?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a3dfc99e835e5c29b22f3397e7da32ae&auto=format&fit=crop&w=753&q=80)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.panel-default {
+  opacity: 0.9;
+  margin-top: 30px;
+}
+
+.form-group.last {
+  margin-bottom: 0px;
+}

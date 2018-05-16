@@ -1,5 +1,7 @@
 import React from "react";
 import * as ideaService from "../services/ideas.service";
+import "./IdeaForm.css";
+import FileUpload from "./fileupload";
 
 class IdeaForm extends React.Component {
   constructor(props) {
@@ -27,7 +29,8 @@ class IdeaForm extends React.Component {
     const initializedIdea = {
       _id: idea._id || "",
       title: idea.title || "",
-      body: idea.body || ""
+      body: idea.body || "",
+      image: idea.image || ""
     };
 
     let formData = {
@@ -40,6 +43,10 @@ class IdeaForm extends React.Component {
         value: initializedIdea.title
       },
       body: {
+        originalValue: initializedIdea.body,
+        value: initializedIdea.body
+      },
+      image: {
         originalValue: initializedIdea.body,
         value: initializedIdea.body
       }
@@ -61,13 +68,12 @@ class IdeaForm extends React.Component {
     });
   }
 
-
-
   onSave(event) {
     const that = this;
     let item = {
       title: this.state.formData.title.value,
-      body: this.state.formData.body.value
+      body: this.state.formData.body.value,
+      image: this.state.formData.image.value
     };
 
     if (this.state.formData._id.value.length > 0) {
@@ -90,52 +96,90 @@ class IdeaForm extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h3> New Idea</h3>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4 col-md-offset-4">
+              <div className="panel panel-default">
+                <div className="panel-heading ">
+                  <h4>
+                    <strong>Idea</strong>
+                  </h4>
+                </div>
+                <div className="panel-body">
+                  <form className="form-horizontal" role="form">
+                    <div className="form-group">
+                      <label htmlFor="title" className="control-label col-sm-3">
+                        Title:
+                      </label>
+                      <div className="col-sm-9">
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="title"
+                          value={this.state.formData.title.value}
+                          placeholder="Title"
+                          onChange={event => {
+                            this.onChange(event);
+                          }}
+                        />
+                      </div>
+                    </div>
 
-        <div className="col-md-4">
-          <label htmlFor="title">Title:</label>
-          <input
-            className="form-control"
-            type="text"
-            name="title"
-            value={this.state.formData.title.value}
-            placeholder="Title"
-            onChange={event => {
-              this.onChange(event);
-            }}
-          />
-          <label htmlFor="title">Body:</label>
-          <textarea
-            className="form-control materialize-textarea"
-            name="body"
-            placeholder="Body"
-            value={this.state.formData.body.value}
-            onChange={event => this.onChange(event)}
-            type="text"
-          />
-        </div>
-        <div className="">
-          <button
-            type="button"
-            className="CreateIdea-submit btn btn-primary"
-            onClick={event => this.onSave(event)}
-          >
-            Save
-          </button>
-          <button
-            type="button"
-            className="CreateIdea-submit btn btn-secondary"
-            onClick={event => this.props.onDelete(this.state.formData)}
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            className="CreateIdea-submit btn btn-danger"
-            onClick={this.props.onCancel}
-          >
-            Cancel
-          </button>
+                    <div className="form-group">
+                      <label htmlFor="title" className="control-label col-sm-3">
+                        Body:
+                      </label>
+                      <div className="col-sm-9">
+                        <textarea
+                          className="form-control"
+                          name="body"
+                          placeholder="Body"
+                          value={this.state.formData.body.value}
+                          onChange={event => this.onChange(event)}
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <FileUpload
+                        name="image"
+                        value={this.state.formData.image.value}
+                        onUpload={this.onChange}
+                      />
+                    </div>
+
+                    <div className="form-group last">
+                      <div className="col-sm-offset-3 col-sm-9">
+                        <button
+                          type="button"
+                          className="CreateIdea-submit btn btn-primary btn-sm"
+                          onClick={event => this.onSave(event)}
+                        >
+                          Save
+                        </button>
+                        <button
+                          type="button"
+                          className="CreateIdea-submit btn btn-secondary btn-sm"
+                          onClick={event =>
+                            this.props.onDelete(this.state.formData)
+                          }
+                        >
+                          Delete
+                        </button>
+                        <button
+                          type="button"
+                          className="CreateIdea-submit btn btn-danger btn-sm"
+                          onClick={this.props.onCancel}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </React.Fragment>
     );

@@ -7,7 +7,8 @@ class Ideas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ideas: []
+      ideas: [],
+      isFlipped: false
     };
 
     this.onSave = this.onSave.bind(this);
@@ -67,24 +68,21 @@ class Ideas extends Component {
     });
   }
 
-  searchIdeas(query){
-    let ideas = this.state.ideas.filter(idea=>{
-      return idea.title.includes(query) || idea.body.includes(query)
-    })
-  }
-
   render() {
     const ideas = this.state.ideas;
 
     return (
       <React.Fragment>
         <div className="container">
-          <IdeaForm
-            formData={this.state.formData}
-            onSave={this.onSave}
-            onDelete={this.onDelete}
-            onCancel={this.onCancel}
-          />
+          <div className="row">
+            <IdeaForm
+              key="front"
+              formData={this.state.formData}
+              onSave={this.onSave}
+              onDelete={this.onDelete}
+              onCancel={this.onCancel}
+            />
+          </div>
         </div>
         <IdeaList ideas={ideas} select={this.onSelect} />
       </React.Fragment>
