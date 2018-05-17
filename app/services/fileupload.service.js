@@ -8,15 +8,15 @@ module.exports = {
 const s3 = new aws.S3();
 
 aws.config.update({
-  accessKeyId: "AKIAIU2GYBE6JHO66SGA",
-  secretAccessKey: "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",
+  accessKeyId: "...",
+  secretAccessKey: "...",
   region: "us-west-2"
 });
 
 function signUrl(filename, filetype) {
   return new Promise((resolve, reject) => {
     const params = {
-      Bucket: "1931",
+      Bucket: "...",
       Key: filename,
       Expires: 60,
       ContentType: filetype,
